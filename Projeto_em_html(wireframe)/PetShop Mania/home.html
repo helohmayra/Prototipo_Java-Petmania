@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - PetShop Mania</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">Petshop Mania</h2>
+        <nav class="navigation">
+            <a href="#">Início</a>
+            <a href="#">Produtos</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+            <button onclick="logout()" class="btnLogin-popup">Sair</button>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="section">
+            <h2>Bem-vindo, <span id="userName"></span>!</h2>
+            <h3>Produtos em destaque</h3>
+            <div class="produtos-grid">
+                <div class="produto-card">
+                    <img src="image/racao-cachorro.jpg" alt="Ração para Cães"
+                        style="width:100%;max-width:120px;border-radius:12px;margin-bottom:10px;">
+                    <h4>Ração para Cães 5kg</h4>
+                    <p>Alimento completo e balanceado para todas as idades.</p>
+                    <p>R$ 79,90</p>
+                    <button class="btn">Comprar</button>
+                </div>
+                <div class="produto-card">
+                    <img src="image/roupa-cachorro.jpg" alt="Roupa para Cães"
+                        style="width:100%;max-width:120px;border-radius:12px;margin-bottom:10px;">
+                    <h4>Roupinha M para Cães</h4>
+                    <p>Protege do frio e é super estiloso.</p>
+                    <p>R$ 15,50</p>
+                    <button class="btn">Comprar</button>
+                </div>
+                <div class="produto-card">
+                    <img src="image/brinquedo.jpg" alt="Brinquedo mordedor"
+                        style="width:100%;max-width:120px;border-radius:12px;margin-bottom:10px;">
+                    <h4>Brinquedo mordedor de osso</h4>
+                    <p>Ajuda na saúde bucal e diverte seu pet por horas.</p>
+                    <p>R$ 45,00</p>
+                    <button class="btn">Comprar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div>PetShop Mania &copy; 2025 &middot; Todos os direitos reservados</div>
+        <div style="margin-top:8px;">
+            <a href="#">Política de Privacidade</a> |
+            <a href="#">Termos de Uso</a>
+        </div>
+    </footer>
+    <script>
+        function showUserName() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.name;
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+        showUserName();
+    </script>
+</body>
+
+</html>

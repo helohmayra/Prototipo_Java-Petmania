@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetShop Mania</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h2 class="logo">Petshop Mania</h2>
+    <nav class="navigation">
+      <a href="index.html">Início</a>
+      <a href="#">Produtos</a>
+      <a href="#">Sobre</a>
+      <a href="#">Contato</a>
+      <button class="btnLogin-popup">Login</button>
+    </nav>
+  </header>
+  <div class="wrapper">
+    <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
+    <div class="form-box login">
+      <h2>Entrar</h2>
+      <form action="#" id="loginForm">
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+          <input type="email" id="loginEmail" required>
+          <label for="loginEmail">E-mail</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <input type="password" id="loginPassword" required>
+          <label for="loginPassword">Senha</label>
+        </div>
+        <div class="perfil-selection">
+          <label><input type="radio" name="perfil" value="cliente" checked> Cliente</label>
+          <label><input type="radio" name="perfil" value="Administrador"> Administrador</label>
+        </div>
+        <div class="remember-forgot">
+          <label><input type="checkbox"> Lembrar-me</label>
+          <a href="esqueci-senha.html">Esqueceu a senha?</a>
+        </div>
+        <button type="submit" class="btn">Entrar</button>
+        <div class="login-register">
+          <p>Não tem uma conta? <a href="#" class="register-link">Cadastre-se</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="form-box register">
+      <h2>Cadastre-se</h2>
+      <form action="#" id="registerForm">
+        <div class="input-box">
+          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+          <input type="text" id="registerUsername" required>
+          <label for="registerUsername">Nome Completo</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+          <input type="email" id="registerEmail" required>
+          <label for="registerEmail">E-mail</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <input type="password" id="registerPassword" required>
+          <label for="registerPassword">Senha</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <input type="password" id="confirmPassword" required>
+          <label for="confirmPassword">Confirmar Senha</label>
+        </div>
+        <div class="remember-forgot">
+          <label><input type="checkbox"> Aceito os termos e condições</label>
+        </div>
+        <button type="submit" class="btn">Cadastrar</button>
+        <div class="login-register">
+          <p>Já tem uma conta? <a href="#" class="login-link">Entrar</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    if (window.location.search.includes('login=1')) {
+      document.querySelector('.wrapper').classList.add('active-popup');
+      document.querySelector('.wrapper').classList.remove('active');
+    }
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const perfil = document.querySelector('input[name="perfil"]:checked').value;
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const userFound = users.find(user => user.email === email && user.password === password);
+      if (userFound) {
+        localStorage.setItem('currentUser', JSON.stringify(userFound));
+        alert(`Bem-Vindo, ${userFound.name}!`)
+        window.location.href = 'home.html';
+      } else {
+        alert('Usuário ou senha inválida');
+      }
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('registerUsername').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const termsAccepted = document.querySelector('#registerForm input[type="checkbox"]').checked;
+      // Validação dos campos
+      if (!name || !email || !password || !confirmPassword) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      if (!termsAccepted) {
+        alert('Você deve aceitar os termos e condições.');
+        return;
+      }
+      if (password !== confirmPassword) {
+        alert('As senhas não coincidem!');
+        return;
+      }
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      if (users.find(user => user.email === email)) {
+        alert('E-mail já cadastrado!');
+        return;
+      }
+      users.push({ name, email, password });
+      localStorage.setItem('users', JSON.stringify(users));
+      alert('Cadastro realizado com sucesso! Faça login.');
+      // Alterna para tela de login
+      document.querySelector('.wrapper').classList.remove('active');
+    });
+
+  </script>
+</body>
+
+</html>

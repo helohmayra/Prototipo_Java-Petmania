@@ -1,0 +1,419 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-image: url('./image/background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+}
+
+.logo {
+  font-size: 2em;
+  color: #000000;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.navigation a {
+  position: relative;
+  font-size: 1.1em;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: #000000;
+  left: 0;
+  bottom: -6px;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: transform 0.5s;
+  transform-origin: right;
+}
+
+.navigation a:hover:after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s;
+}
+
+.navigation .btnLogin-popup {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #000000;
+  font-weight: 500;
+  margin-left: 40px;
+}
+
+.navigation .btnLogin-popup:hover {
+  background: #000000;
+  color: #ffffff;
+  transition: .5s;
+}
+
+.wrapper {
+  position: relative;
+  width: 400px;
+  height: 440px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transform: scale(0);
+  transition: transform .5s ease, height .2s ease;
+}
+
+.wrapper.active-popup {
+  transform: scale(1);
+}
+
+.wrapper.active {
+  height: 520px;
+}
+
+.wrapper .form-box {
+  width: 100%;
+  padding: 40px;
+}
+
+.wrapper .form-box.login {
+  position: absolute;
+  transition: transform .18s ease;
+  transform: translateX(0);
+}
+
+.wrapper.active .form-box.login {
+  transition: none;
+  transform: translateX(-400px);
+}
+
+.wrapper .form-box.register {
+  position: absolute;
+  transition: none;
+  transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register {
+  transition: transform .18s ease;
+  transform: translateX(0);
+}
+
+.wrapper .icon-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 45px;
+  height: 45px;
+  background: #000000;
+  font-size: 2em;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 19px;
+  border-top-right-radius: 18px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.form-box.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box h2 {
+  font-size: 2em;
+  color: #000000;
+  text-align: center;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid #000000;
+  margin: 30px 0;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: #000000;
+  pointer-events: none;
+  font-weight: 500;
+  font-size: 1em;
+  transition: 0.5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+  top: -5px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #000000;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 8px;
+  color: #000000;
+  font-size: 1.2em;
+  line-height: 57px;
+}
+
+.remember-forgot {
+  font-size: .9em;
+  color: #000000;
+  font-weight: 500;
+  margin: -15px 0 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remember-forgot label input {
+  accent-color: #000000;
+  margin-right: 3px;
+}
+
+.remember-forgot a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  width: 100%;
+  height: 45px;
+  background: #000000;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.login-register {
+  font-size: .9em;
+  color: #000000;
+  font-weight: 500;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.login-register p a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-register p a:hover {
+  text-decoration: underline;
+}
+
+.perfil-selection {
+  padding: 20px;
+  margin: 20px;
+
+}
+
+/* Estilo para a página home.html */
+
+main {
+  flex: 1 0 auto;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 120px auto 0 auto;
+  padding: 32px 16px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.section {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px 40px 24px;
+  margin-bottom: 32px;
+}
+
+.section h2 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.section h3 {
+  font-size: 1.2em;
+  color: #444;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.produto-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 18px 12px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+  min-height: 260px;
+}
+
+.produto-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+}
+
+.produto-card img {
+  width: 100%;
+  max-width: 120px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+}
+
+.produto-card h4 {
+  margin: 8px 0 4px 0;
+  font-size: 1.1em;
+  color: #222;
+  font-weight: 700;
+  text-align: center;
+}
+
+.produto-card p {
+  font-size: 0.97em;
+  color: #444;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.produto-card .btn {
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: 0;
+
+}
+
+footer {
+  width: 100%;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+  padding: 32px 0 16px 0;
+  margin-top: 48px;
+  text-align: center;
+  font-size: 1em;
+  color: #888;
+  position: relative;
+  bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    max-width: 98vw;
+    padding: 10px 2vw 0 2vw;
+  }
+
+  .section {
+    padding: 18px 4vw 24px 4vw;
+    border-radius: 18px;
+  }
+
+  footer {
+    border-radius: 12px 12px 0 0;
+    padding: 18px 0 10px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .produtos-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .main-content {
+    margin-top: 90px;
+  }
+}
